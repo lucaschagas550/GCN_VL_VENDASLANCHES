@@ -1,0 +1,110 @@
+﻿@using VL_VendasLanches.Extensions
+@model PedidoLancheViewModel //ViewImports tem um using para o import, assim a importação fica disponivel para aplicação toda
+
+<div>
+    <div class="card border mt-4 container">
+        <div class="card-header bg-dark text-light ml-0 row">
+            <div class="col-6">
+                Pedido: @Model.Pedido.NumerodoPedido
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-outline-warning ">
+                    @Model.Pedido.StatusPedido
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>
+                Data do Pedido :  <strong>@Model.Pedido.PedidoEnviado</strong>
+                <br />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <p>Endereço  : <strong>@Model.Pedido.Endereco</strong></p>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <p>Numero  : <strong>@Model.Pedido.Numero</strong></p>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <p>Cidade  : <strong>@Model.Pedido.Cidade</strong></p>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <p>Cidade  : <strong>@Model.Pedido.Cidade</strong></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <p>Estado  : <strong>@Model.Pedido.Estado</strong></p>
+                    </div>
+                </div>
+                <br />
+                <div class="d-none d-lg-block">
+                    <div class="row text-info">
+                        <div class="col-lg-2">
+                        </div>
+                        <div class="col-lg-5">
+                            Prodto
+                        </div>
+                        <div class="col-lg-2">
+                            Preço
+                        </div>
+                        <div class="col-lg-2">
+                            Quantidade
+                        </div>
+                        <div class="col-lg-1">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                @foreach (var item in Model.PedidoDetalhes)
+                {
+                    <div class="row h-100">
+                        <div class="col-4 col-md-2 text-center py-2">
+                            <img src="@item.Produto.ImagemUrl" class="rounded" width="100%" />
+                        </div>
+                        <div class="col-8 col-md-5">
+                            <h5>@item.Produto.Nome</h5>
+                            <div style="font-size:11px;">
+                                @Html.Raw(item.Produto.DescricaoCurta)
+                            </div>
+                            <div style="font-size:11px;">
+                                @Html.Raw("Observação("+item.Observacao+")")
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                            <span style="font-size:17px;">
+                                @string.Format("{0:c}", item.Produto.Preco)
+                            </span>
+                        </div>
+                        <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                            <span style="font-size:17px;">
+                                @item.Quantidade
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="row">
+                    <div class="col-6 text-end">
+                        <span class="text-danger" style="font-size:21px;">
+                            Total: @this.FormatoMoeda(Model.Pedido.PedidoTotal)
+                            <br />
+                        </span>
+                    </div>
+                </div>
+        </div>
+        <div class="card-footer row">
+            <div class="col-6 col-md-3 offset-md-6">
+            </div>
+            <div class="col-6 col-md-3">
+                <a class="btn btn-success" asp-controller="Pedido" asp-action="PedidosUsuario">
+                    <span>Voltar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

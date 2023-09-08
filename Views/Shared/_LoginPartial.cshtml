@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@*Injeção de dependencia*@
+@inject SignInManager<IdentityUser> SigInManager
+
+@if (SigInManager.IsSignedIn(User))
+{
+    <div class="text-start m-1">
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDarkDropdownMenuLinkAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black">
+                        Conta
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Edit">
+                                Editar
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Pedido" asp-action="PedidosUsuario">
+                                Pedidos
+                            </a>
+                        </li>
+                        <li>
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="dropdown-item">
+                                <ul class="nav navbar-brand navbar-left">
+                                    <button type="submit" style="width:auto; color:white" class="dropdown-item btn btn-link py-0">
+                                        @* Logout: @User.Identity.Name*@
+                                        Sair
+                                    </button>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                <li />
+            </ul>
+        </div>
+    </div>
+
+}
+else
+{
+    @*ReturnUrl pega a url da ultima pagina visitada pelo usuario, assim se login for sucesso ele retorna para a pagina*@
+    <div class="text-start m-1">
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDarkDropdownMenuLinkAccount" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black">
+                        Conta
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Login"
+                           asp-route-returnUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.QueryString)">Login</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Register">
+                                Registrar
+                            </a>
+                        </li>
+                    </ul>
+                <li />
+            </ul>
+        </div>
+    </div>
+}

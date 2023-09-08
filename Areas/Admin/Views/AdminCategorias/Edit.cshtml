@@ -1,0 +1,40 @@
+﻿@model VL_VendasLanches.Models.Categoria
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-dark">Editar Categoria</h1>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="CategoriaNome" class="control-label"></label>
+                        <input asp-for="CategoriaNome" class="form-control" />
+                        <span asp-validation-for="CategoriaNome" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <input asp-for="Descricao" class="form-control" />
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <hr />
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

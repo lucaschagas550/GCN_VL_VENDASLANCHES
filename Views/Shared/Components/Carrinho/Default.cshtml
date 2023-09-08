@@ -1,0 +1,11 @@
+﻿@model int
+
+<div style="padding-right: 15px">
+    <a asp-controller="CarrinhoCompra" asp-action="Carrinho" class="widget-header">
+        @if (Model > 0)
+        {
+            <span class="badge badge-pill badge-danger notify" style="color:white; padding-left: 20px ;text-align-last:end" >@Model</span>
+        }
+        <div><i class="fa fa-shopping-cart fa-lg fa-" style="color:white"></i></div>
+    </a>
+</div>

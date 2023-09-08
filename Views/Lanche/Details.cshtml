@@ -1,0 +1,78 @@
+﻿@using VL_VendasLanches.Extensions
+@model ProdutoViewModel
+
+<form method="post" asp-controller="CarrinhoCompra" asp-action="AdicionarItemNoCarrinhoCompra">
+    <input type="hidden" asp-for="@Model.Id" name="Id" />
+    <div class="pt-4">
+        <div class="card container" style="border:1px solid #808080;">
+            <div class="card-header text-light row" style="border-radius: 0px;">
+                <div class="col-12 col-md-9">
+                    <h1 class="text-dark">@Model.Nome</h1>
+                </div>
+                <div class="col-12 col-md-3 text-end">
+                    <h1 class="text-warning">@this.FormatoMoeda(Model.Preco ?? 0)</h1>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 p-1 text-center">
+                            <img src="@Model.ImagemUrl" style="border-radius: 35px;" width="100%" class="rounded" />
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row pl-3">
+                                <div class="col-12">
+                                    @* <span class="badge badge-primary text-success p-3 border">
+                                    @Model.
+                                    </span>*@
+                                    <h3 class="text-success"></h3>
+                                    <p class="text-secondary"></p>
+                                    <p>@Html.Raw(Model.DescricaoDetalhada)</p>
+                                </div>
+                            </div>
+                            <!--Selecionar Tamanho do lanche-->
+                            @if (Model.ExisteTamanho)
+                            {
+                                <div class="row text-bottom" style="">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label" style="margin-bottom: 10px">Selecione o Tamanho:</label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <select id="TamanhoDoProdutoSelecionado" name="TamanhoId" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            @foreach (var tamanho in Model.Tamanhos)
+                                            {
+                                                <option value="@tamanho.TamanhoId">@tamanho.Tamanho.TamanhoEnum</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+                            </br>
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label asp-for=" @Model.quantidade" class="control-label"></label>
+                                    <input asp-for=" @Model.quantidade" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control"/>
+                                    <span asp-validation-for=" @Model.quantidade" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for=" @Model.observacao" class="control-label"></label>
+                                    <textarea asp-for="@Model.observacao" class="form-control"></textarea>
+                                    <span asp-validation-for="@Model.observacao" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <!--Selecionar Tamanho do lanche-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-footer row d-flex justify-content-center">
+                    <div class="d-grid gap-2 col-md-6">
+                        <button class="btn btn-success flex-end" type="submit" id="AdicionarItemNoCarrinhoCompra" style="">Adicionar</button>
+                        <a class="btn btn-warning" asp-controller="Lanche" asp-action="List">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

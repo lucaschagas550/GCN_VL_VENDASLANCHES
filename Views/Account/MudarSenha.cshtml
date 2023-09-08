@@ -1,0 +1,45 @@
+﻿@model SenhaViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-dark">Digite a nova senha!</h1>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <vc:Summary></vc:Summary>
+                <form asp-controller="Account" asp-action="MudarSenha" method="post" class="p-1">
+                    <div class="form-group">
+                        <label asp-for="Passwordold" class="control-label"></label>
+                        <input asp-for="Passwordold" class="form-control" />
+                        <span asp-validation-for="Passwordold" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="confirmesenha" class="control-label"></label>
+                        <input asp-for="confirmesenha" class="form-control" />
+                        <span asp-validation-for="confirmesenha" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <hr />
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                        <a class="btn btn-primary" asp-controller="Account" asp-action="Edit">Voltar</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

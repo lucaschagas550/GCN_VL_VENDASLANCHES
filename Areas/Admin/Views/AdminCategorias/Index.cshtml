@@ -1,0 +1,53 @@
+﻿@model IEnumerable<VL_VendasLanches.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-dark">Categoria</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-action="Create" class="btn btn-outline-primary">
+                <i class="fas fa-plus"></i> Criar Categoria
+            </a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoriaNome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoriaNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-edit fa-2x" style="color:blue"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-info-circle fa-2x" style="color:black"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash fa-2x" style="color:#d9534f"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

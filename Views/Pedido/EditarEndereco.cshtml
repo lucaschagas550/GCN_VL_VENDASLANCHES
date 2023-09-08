@@ -1,0 +1,73 @@
+﻿@model CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Editar endereco";
+}
+<div class="row mt-4 p-4 border">
+    <vc:Summary></vc:Summary>
+    <div class="col-md-20 pb-2 ">
+        <form asp-controller="Pedido" asp-action="EditarEndereco" method="post" class="p-1">
+            <input type="hidden" asp-for="idaspuser" />
+            <input type="hidden" asp-for="Nome" />
+            <input type="hidden" asp-for="Sobrenome" />
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="Telefone" />
+            @*agrupando na mesma linha nome e valor sobrenome e valor*@
+            <h3 class="border-bottom">Editar Endereço</h3>
+            <br />
+            </hr>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Cep" class="control-label"></label>
+                    <input asp-for="Cep" class="form-control" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <a class="btn btn-primary m-4 mb-6" asp-controller="CarrinhoCompra" asp-action="Index">Buscar cep</a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Endereco" class="control-label"></label>
+                    <input asp-for="Endereco" class="form-control" />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Complemento" class="control-label"></label>
+                    <input asp-for="Complemento" class="form-control" />
+                    <span asp-validation-for="Complemento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Cidade" class="control-label"></label>
+                    <input asp-for="Cidade" class="form-control" />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Estado" class="control-label"></label>
+                    <input asp-for="Estado" class="form-control" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+            </br>
+            <br />
+            </hr>
+            <div class="form-row">
+                <div class="form-group col-12">
+
+                    <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+                    <a class="btn btn-primary" asp-controller="Pedido" asp-action="Checkout">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

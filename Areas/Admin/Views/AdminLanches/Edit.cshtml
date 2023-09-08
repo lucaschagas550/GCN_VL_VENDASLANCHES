@@ -1,0 +1,138 @@
+﻿@model VL_VendasLanches.ViewModels.ProdutoViewModel
+
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-dark">Editar Produto</h1>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <vc:Summary></vc:Summary>
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="DescricaoCurta" class="control-label"></label>
+                        <textarea asp-for="DescricaoCurta" class="form-control"></textarea>
+                        <span asp-validation-for="DescricaoCurta" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="DescricaoDetalhada" class="control-label"></label>
+                        <textarea asp-for="DescricaoDetalhada" class="form-control"></textarea>
+                        <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="Preco" class="control-label"></label>
+                        <input asp-for="Preco" class="form-control" data-val-number="Este campo precisa ter números" data-val="true" />
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                    </div>
+                    </br>
+
+                    <div class="form-group">
+                        <label asp-for="ImagemUrl" class="control-label"></label>
+                        <input asp-for="ImagemUrl" class="form-control" />
+                        <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                    </div>
+                    </br>
+
+                    @*                        <div class="form-group col-md-6">
+                    <img src="@Model.ImagemUrl" style="border-radius: 35px;" width="100%" />
+                    </div>
+                    *@
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="ImagemThumbnailUrl" class="control-label"></label>
+                        <input asp-for="ImagemThumbnailUrl" class="form-control" />
+                        <span asp-validation-for="ImagemThumbnailUrl" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label">Marcar como Preferido?</label>
+                            <br />
+                            <label class="form-check-label" style="padding-left: 20px">
+                                <input class="form-check-input" asp-for="IsLanchePreferido" /> @Html.DisplayNameFor(model => model.IsLanchePreferido)
+                            </label>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label class="control-label">Marcar como em Estoque?</label>
+                        <br />
+                        <label class="form-check-label" style="padding-left: 20px">
+                            <input class="form-check-input" asp-for="EmEstoque" /> @Html.DisplayNameFor(model => model.EmEstoque)
+                        </label>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label asp-for="CategoriaId" class="control-label"></label>
+                        <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="form-group">
+                            @if (Model.TodosTamanhos.Any())
+                            {
+                                @foreach (var tamanho in @Model.TodosTamanhos)
+                                {
+                                    @if (Model.Tamanhos.Any(p => p.TamanhoId.Equals(tamanho.Id)))
+                                    {
+                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" checked="checked" value=@tamanho.Id />
+                                        <label>@tamanho.TamanhoEnum</label>
+                                    }
+                                    else
+                                    {
+                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" value=@tamanho.Id />
+                                        <label>@tamanho.TamanhoEnum</label>
+                                    }
+                                }
+                            }
+                            <br />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            @if (Model.TodosComplementos.Any())
+                            {
+                                @foreach (var complemento in @Model.TodosComplementos)
+                                {
+                                    @if (Model.Complementos.Any(p => p.ComplementoId.Equals(complemento.Id)))
+                                    {
+                                        <input id="ComplementosSelecionados" name="ComplementosSelecionados" type="checkbox" checked="checked" value=@complemento.Id />
+                                        <label>@complemento.Nome</label>
+                                    }
+                                    else
+                                    {
+                                        <input id="ComplementosSelecionados" name="ComplementosSelecionados" type="checkbox" value=@complemento.Id />
+                                        <label>@complemento.Nome</label>
+                                    }
+                                }
+                            }
+                            <br />
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

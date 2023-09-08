@@ -1,0 +1,25 @@
+﻿@model Produto
+
+<div class="col-sm-6 col-md-4 col-6 mb-4 d-flex align-items-stretch row-cols-md-1 g-4">
+    <div class="card mt-4">
+        <div class="d-flex align-self-center pt-2" style="cursor: pointer;">
+            <a asp-controller="Lanche" asp-action="Details" asp-route-lancheid="@Model.Id">
+         @*   <a asp-controller="Lanche" asp-action="Details" asp-route-LancheId="@Model.LancheId"> *@
+                <img src=  "@Html.DisplayFor(modelItem => @Model.ImagemUrl)"  class="card-img-top"
+                     alt="Lanche a venda"
+                     width="120"
+                     height="120"> 
+           </a>
+        </div>
+        <div class="card-body">
+           <a asp-controller="Lanche" asp-action="Details" asp-route-lancheid="@Model.Id">
+                <h5 class="card-title"> @Html.DisplayFor(modelItem =>@Model.Nome)</h5>
+           </a>
+            <p class="card-text">@Html.DisplayFor(modelItem => @Model.DescricaoCurta)</p>
+            <p class="card-text">@Html.DisplayFor(modelItem => @Model.Preco)</p>
+             @*<a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",new {id=@Model.LancheId},Context.Request.Scheme)',''New Transaction'')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+            <a class="btn btn-primary btn-sm" id="cartButton" asp-controller="CarrinhoCompra" asp-action="AdicionarItemNoCarrinhoCompra"
+               asp-route-LancheId="@Model.LancheId">Adicionar ao Carrinho</a>*@
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@model CheckoutViewModel
+
+<br />
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">@ViewBag.CheckoutCompletoMensagem</h4>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-body">
+            <p>Cliente : <strong>@Model.Nome @Model.Sobrenome</strong>
+            <p>Data do Pedido :  <strong>@Model.PedidoEnviado</strong>
+            <p>Número do Pedido   : <strong>@Model.NumerodoPedido</strong></p>
+            <br />
+            <hr />
+            <div class="d-none d-lg-block">
+                <div class="row text-info">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-5">
+                        Prodto
+                    </div>
+                    <div class="col-lg-2">
+                        Preço
+                    </div>
+                    <div class="col-lg-2">
+                        Quantidade
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                </div>
+            </div>
+            <hr />
+                    @foreach (var item in Model.Carrinho)
+                    {
+                <div class="row h-100">
+                    <div class="col-4 col-md-2 text-center py-2">
+                        <img src="@item.Produto.ImagemUrl" class="rounded" width="100%" />
+                    </div>
+                    <div class="col-8 col-md-5">
+                        <h5>@item.Produto.Nome</h5>
+                        <div style="font-size:11px;">
+                                    @Html.Raw(item.Produto.DescricaoCurta)
+                        </div>
+                        <div style="font-size:11px;">
+                                    @Html.Raw("Observação("+item.Observacao+")")
+                        </div>
+                    </div>
+                    <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                        <span style="font-size:17px;">
+                                    @string.Format("{0:c}", item.Produto.Preco)
+                        </span>
+                    </div>
+                    <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                        <span style="font-size:17px;">
+                                    @item.Quantidade
+                        </span>
+                    </div>
+                </div>
+                <hr />
+                    }
+            <br />
+            <h4 class="p-2">Valor Total do Pedido: <strong>@(((decimal)ViewBag.TotalPedido).ToString("C2"))</strong></h4>
+        </div>
+    </div>
+</div>
+<div class="form-group p-2" style="text-align :center">
+    <h3>
+        <a class="btn btn-primary btn-lg m-2" asp-controller="Home" asp-action="Index">Retornar</a>
+    </h3>
+</div>

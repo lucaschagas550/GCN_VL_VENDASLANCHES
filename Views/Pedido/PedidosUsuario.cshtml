@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-dark">Meus Pedidos</h1>
+        </div>
+    </div>
+    </br>
+    <table class="table">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumerodoPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PedidoEnviado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PedidoTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FormaDePagamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalItensPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusPedido)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumerodoPedido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PedidoEnviado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PedidoTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormaDePagamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalItensPedido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusPedido)
+                    </td>
+
+                    <td>
+
+                        <a asp-controller="Pedido" asp-action="PedidosUsuarioDetalhe" asp-route-id="@item.Id"><i class="fa-solid fa-info-circle fa-2x" style="color:black"></i></a>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,182 @@
+﻿@using VL_VendasLanches.Extensions
+@model CheckoutViewModel
+
+<form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+    <input type="hidden" asp-for="@Model.idaspuser" name="idaspuser" />
+    <input type="hidden" asp-for="@Model.TotalItensPedido" name="TotalItensPedido" />
+    <div>
+        <div class="card border mt-4 container">
+            <div class="card-header bg-dark text-light ml-0 row">
+                <div class="col-6">
+                    Confirmação de Pedido
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-outline-warning" asp-controller="CarrinhoCompra" asp-action="Carrinho">
+                        Carrinho
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row pb-2">
+                            <div class="col">
+                                <h3 class="text-dark">Dados Cliente</h3>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p>Nome: <strong>@Model.Nome  @Model.Sobrenome </strong></p>
+                            <input type="hidden" asp-for="@Model.Nome" name="Nome" />
+                            <input type="hidden" asp-for="@Model.Sobrenome" name="Sobrenome" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Email: <strong>@Model.Email</strong></p>
+                            <input type="hidden" asp-for="@Model.Email" name="Email" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Telefone: <strong>@Model.Telefone</strong></p>
+                            <input type="hidden" asp-for="@Model.Telefone" name="Telefone" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row pb-2">
+                            <div class="col">
+                                <h3 class="text-dark">Dados de Entrega</h3>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p>Endereço: <strong>@Model.Endereco</strong></p>
+                            <input type="hidden" asp-for="@Model.Endereco" name="Endereco" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Numero: <strong>@Model.Numero</strong></p>
+                            <input type="hidden" asp-for="@Model.Numero" name="Numero" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Complemento: <strong>@Model.Complemento</strong></p>
+                            <input type="hidden" asp-for="@Model.Complemento" name="Complemento" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Cidade: <strong>@Model.Cidade</strong></p>
+                            <input type="hidden" asp-for="@Model.Cidade" name="Cidade" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Estado: <strong>@Model.Estado</strong></p>
+                            <input type="hidden" asp-for="@Model.Estado" name="Estado" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <p>Cep: <strong>@Model.Cep</strong></p>
+                            <input type="hidden" asp-for="@Model.Cep" name="Cep" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <p style="font-size:21px"> Frete: <strong>R$10,00</strong></p>
+                            <input type="hidden" asp-for="@Model.Frete" name="Frete" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.ModelodeEntrega, "Entrega") &nbsp; @Html.Label("Entrega")
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.ModelodeEntrega, "Retirar na Loja") &nbsp;@Html.Label("Retirar na Loja")
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row pb-2">
+                            <div class="col">
+                                <h3 class="text-dark">Forma de Pagamento</h3>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.FormaDePagamento, "Cartão de Credito") &nbsp;@Html.Label("Cartão de Credito")
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.FormaDePagamento, "Cartão de Debito") &nbsp;@Html.Label("Cartão de Debito")
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.FormaDePagamento, "Dinheiro") &nbsp;@Html.Label("Dinheiro")
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.RadioButtonFor(model => model.FormaDePagamento, "Pix") &nbsp;@Html.Label("Pix")
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div class="d-none d-lg-block">
+                    <div class="row text-info">
+                        <div class="col-lg-2">
+                        </div>
+                        <div class="col-lg-5">
+                            Prodto
+                        </div>
+                        <div class="col-lg-2">
+                            Preço
+                        </div>
+                        <div class="col-lg-2">
+                            Quantidade
+                        </div>
+                        <div class="col-lg-1">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                @foreach (var item in Model.Carrinho)
+                {
+                    <div class="row h-100">
+                        <div class="col-4 col-md-2 text-center py-2">
+                            <img src="@item.Produto.ImagemUrl" class="rounded" width="100%" />
+                        </div>
+                        <div class="col-8 col-md-5">
+                            <h5>@item.Produto.Nome</h5>
+                            <div style="font-size:11px;">
+                                @Html.Raw(item.Produto.DescricaoCurta)
+                            </div>
+                            <div style="font-size:11px;">
+                                @Html.Raw("Observação("+item.Observacao+")")
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                            <span style="font-size:17px;">
+                                @string.Format("{0:c}", item.Produto.Preco)
+                            </span>
+                        </div>
+                        <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                            <span style="font-size:17px;">
+                                @item.Quantidade
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="row">
+                    <div class="col-6 text-end">
+                        <span class="text-danger" style="font-size:21px;">
+                            Total: @this.FormatoMoeda(Model.PedidoTotal)
+                            <br />
+                        </span>
+                    </div>
+                    <input type="hidden" asp-for="@Model.PedidoTotal" name="PedidoTotal" />
+                </div>
+            </div>
+
+            <div class="card-footer row">
+                <div class="row">
+                    <div class="col-6 col-md-6 ">
+                        <a class="btn btn-primary m-4 mb-6" asp-controller="Pedido" asp-action="EditarEndereco" asp-route-id="@Model">Alterar Endereço</a>
+                        <input class="btn btn-success" type="submit" value="Concluir Pedido" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

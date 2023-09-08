@@ -1,0 +1,30 @@
+﻿@model ProdutoListViewModel //View fortemente tipada que é de lanche, usado para criar a view
+
+@*@{
+    Layout = null; // Remove o layout padrão que é compartilhado, assim é possivel fazer layout personalizado somente para essa view
+    }*@
+
+<div>
+
+    <br />
+    <h2>Categoria: @Model.CategoriaAtual</h2>
+    <br />
+
+    @*    <br />
+        <h2>@ViewData["Titulo"]</h2>
+        <br />
+        <h2>@ViewData["Data"]</h2>
+        <hr />
+        <h6>@ViewBag.TotalLanches @ViewBag.TotalLanchescount</h6>
+        <hr />*@
+</div>
+
+@*<p>@TempData["Nome"]</p>*@
+
+@*3 objetos para 3 coluna, g-4 define a margem*@
+<div class="row">
+    @foreach (var lanche in Model.Lanches)
+    {
+        <partial name="_LanchesResumo" for="@lanche" />//passa o lanche do for para a model da partial view
+    }
+    </div> 

@@ -1,0 +1,108 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="row mt-4">
+    <vc:Summary></vc:Summary>
+    <div class="col-md-6 d-none d-md-block" style="height: 450px;">
+        <div class="text-center col-md-12 my-auto side-heder">
+            <h1>Cadastro de Usuário</h1>
+            <img src="/images/registerImage.png" class="my-4" alt="" width="400px">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <form asp-controller="Account" asp-action="Register" method="post" class="p-1">
+            <div class="pb-2 d-block d-md-none">
+                <h3 class="border-bottom">Cadastro de Usuário</h3>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="sobrenome" class="control-label"></label>
+                    <input asp-for="sobrenome" class="form-control" />
+                    <span asp-validation-for="sobrenome" class="text-danger"></span>    @*faz a validacao conforme os data anotacion da class pedido e propriedade sobrenome*@
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="cep" class="control-label"></label>
+                    <input asp-for="cep" class="form-control" />
+                    <span asp-validation-for="cep" class="text-danger"></span>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <a class="btn btn-primary m-4 mb-6" asp-controller="CarrinhoCompra" asp-action="Index">Buscar cep</a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="endereco" class="control-label"></label>
+                    <input asp-for="endereco" class="form-control" />
+                    <span asp-validation-for="endereco" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="numero" class="control-label"></label>
+                    <input asp-for="numero" class="form-control" />
+                    <span asp-validation-for="numero" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="complemento" class="control-label"></label>
+                    <input asp-for="complemento" class="form-control" />
+                    <span asp-validation-for="complemento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="telefone" class="control-label"></label>
+                    <input asp-for="telefone" class="form-control" />
+                    <span asp-validation-for="telefone" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="email" class="control-label"></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="confirmesenha" class="control-label"></label>
+                    <input asp-for="confirmesenha" class="form-control" />
+                    <span asp-validation-for="confirmesenha" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-row p-1 mb-3">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                </div>
+            </div>
+            </br>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    Já possui conta?
+                    <a asp-controller="Account" asp-action="Login"> Acesse sua conta</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
