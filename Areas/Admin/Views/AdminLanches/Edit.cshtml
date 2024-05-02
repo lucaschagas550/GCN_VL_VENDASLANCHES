@@ -80,22 +80,39 @@
                     </br>
                     <div class="row">
                         <div class="form-group">
-                            @if (Model.TodosTamanhos.Any())
-                            {
-                                @foreach (var tamanho in @Model.TodosTamanhos)
-                                {
-                                    @if (Model.Tamanhos.Any(p => p.TamanhoId.Equals(tamanho.Id)))
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Selecione os Tamanhos dos Lanche
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @if (Model.TodosTamanhos.Any())
                                     {
-                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" checked="checked" value=@tamanho.Id />
-                                        <label>@tamanho.TamanhoEnum</label>
+                                        @foreach (var tamanho in @Model.TodosTamanhos)
+                                        {
+                                            @if (Model.Tamanhos.Any(p => p.TamanhoId.Equals(tamanho.Id)))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        @tamanho.TamanhoEnum
+                                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" checked="checked" value=@tamanho.Id />
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        @tamanho.TamanhoEnum
+                                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" value=@tamanho.Id />
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
                                     }
-                                    else
-                                    {
-                                        <input id="TamanhosSelecionados" name="TamanhosSelecionados" type="checkbox" value=@tamanho.Id />
-                                        <label>@tamanho.TamanhoEnum</label>
-                                    }
-                                }
-                            }
+                                </ul>
+                            </div>
+
                             <br />
                         </div>
                     </div>
@@ -135,4 +152,31 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function (item) {
+                item.addEventListener('click', function (event) {
+                    // Impede que o evento se propague para componentes superiores
+                    event.stopPropagation();
+
+                    // Verifica se o clique veio diretamente do checkbox
+                    if (event.target.type === 'checkbox') {
+                        return; // Deixa o comportamento padrão do checkbox acontecer sem intervenção
+                    }
+
+                    // Previne a ação padrão do link se o clique não veio do checkbox
+                    event.preventDefault();
+
+                    // Localiza o checkbox dentro do item clicado e alterna o seu estado
+                    var checkbox = this.querySelector('input[type="checkbox"]');
+                    if (checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                });
+            });
+        });
+    </script>
+
+}

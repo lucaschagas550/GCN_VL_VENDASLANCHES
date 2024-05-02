@@ -80,3 +80,13 @@ file,
 textarea {
     max-width: 400px;
 }
+
+/*.dropdown-menu label {
+    display: block;
+    cursor: pointer;
+    padding: 0.5rem 1rem;*/ /* Bootstrap padding style */
+/*}
+
+.dropdown-menu input[type="checkbox"] {
+    margin-right: 10px;
+}*/
